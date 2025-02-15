@@ -2,7 +2,10 @@ package com.katalon.jenkins.plugin.helper;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.katalon.jenkins.plugin.entity.*;
+import com.katalon.jenkins.plugin.entity.BuildInfo;
+import com.katalon.jenkins.plugin.entity.Job;
+import com.katalon.jenkins.plugin.entity.JobStatus;
+import com.katalon.jenkins.plugin.entity.TestProject;
 import com.katalon.utils.Logger;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;
