@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class ExecuteKatalonStudioHelper {
 
+    @SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     public static boolean executeKatalon(
             FilePath workspace,
             EnvVars buildEnvironment,
@@ -26,7 +27,7 @@ public class ExecuteKatalonStudioHelper {
             String xvfbConfiguration) {
         Logger logger = new JenkinsLogger(taskListener);
         try {
-            if (launcher.getChannel() == null) {
+            if (launcher == null || launcher.getChannel() == null) {
                 logger.info("Launcher channel is null");
                 return false;
             }
@@ -45,17 +46,22 @@ public class ExecuteKatalonStudioHelper {
                             buildEnvironment.entrySet()
                                     .forEach(entry -> environmentVariables.put(entry.getKey(), entry.getValue()));
                             return KatalonUtils.executeKatalon(
-                                logger,
-                                version,
-                                location,
-                                workspaceLocation,
-                                executeArgs,
-                                x11Display,
-                                xvfbConfiguration,
-                                environmentVariables);
+                                    logger,
+                                    version,
+                                    location,
+                                    workspaceLocation,
+                                    executeArgs,
+                                    x11Display,
+                                    xvfbConfiguration,
+                                    environmentVariables);
+                        } else {
+                            logger.info("Workspace location is null");
+                            return false;
                         }
+                    } else {
+                        logger.info("Workspace is null");
+                        return false;
                     }
-                    return true;
                 }
             });
         } catch (Exception e) {
