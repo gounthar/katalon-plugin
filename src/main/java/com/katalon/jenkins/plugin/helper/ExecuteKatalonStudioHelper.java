@@ -26,6 +26,10 @@ public class ExecuteKatalonStudioHelper {
             String xvfbConfiguration) {
         Logger logger = new JenkinsLogger(taskListener);
         try {
+            if (launcher.getChannel() == null) {
+                logger.info("Launcher channel is null");
+                return false;
+            }
             return launcher.getChannel().call(new MasterToSlaveCallable<Boolean, Exception>() {
                 @Override
                 public Boolean call() throws Exception {
